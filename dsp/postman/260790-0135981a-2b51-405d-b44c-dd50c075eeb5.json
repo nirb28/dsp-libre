@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "260790-0135981a-2b51-405d-b44c-dd50c075eeb5",
+		"name": "Libre",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "JWT",
+			"id": "260790-60f3f10b-f159-4112-8885-5c5446814b96",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"email\":\"daljeetsm@gmail.com\",\"password\":\"daljeets1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reload Models",
+			"id": "260790-bd38b3cd-6802-4f63-a1f7-540cda53aec2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhNjNlZTc4NmMwYWQ1NWE1ZDdmNyIsInVzZXJuYW1lIjoiZGFsamVldHNtQGdtYWlsLmNvbSIsInByb3ZpZGVyIjoibG9jYWwiLCJlbWFpbCI6ImRhbGplZXRzbUBnbWFpbC5jb20iLCJpYXQiOjE3NjM0ODcxMjksImV4cCI6MTc2MzQ4ODAyOX0.KyZ8vEcUF10krPIa-Y7NGt9dOc4qt9Bsbr5ZQnpwDJQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3080/api/models/reload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3080",
+					"path": [
+						"api",
+						"models",
+						"reload"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
