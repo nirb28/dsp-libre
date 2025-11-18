@@ -1,6 +1,6 @@
 const { logger } = require('@librechat/data-schemas');
 const { CacheKeys } = require('librechat-data-provider');
-const { loadDefaultModels, loadConfigModels } = require('~/server/services/Config');
+const { loadDefaultModels, loadConfigModels, clearAppConfigCache } = require('~/server/services/Config');
 const { getLogStores } = require('~/cache');
 
 /**
@@ -37,6 +37,11 @@ async function loadModels(req) {
   return modelConfig;
 }
 
+async function clearModelsCache() {
+  const cache = getLogStores(CacheKeys.CONFIG_STORE);
+  await cache.delete(CacheKeys.MODELS_CONFIG);
+}
+
 async function modelController(req, res) {
   try {
     const modelConfig = await loadModels(req);
@@ -47,4 +52,18 @@ async function modelController(req, res) {
   }
 }
 
-module.exports = { modelController, loadModels, getModelsConfig };
+async function reloadModelsController(req, res) {
+  try {
+    // Clear app config and models cache so they are reloaded from librechat.yaml
+    await clearAppConfigCache();
+    await clearModelsCache();
+
+    const modelConfig = await loadModels(req);
+    res.send(modelConfig);
+  } catch (error) {
+    logger.error('Error reloading models:', error);
+    res.status(500).send({ error: error.message });
+  }
+}
+
+module.exports = { modelController, reloadModelsController, loadModels, getModelsConfig };
